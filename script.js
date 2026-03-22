@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function animateOnScroll() {
-    const elements = document.querySelectorAll('.news-card, .tip, .dica, .passo');
+    const elements = document.querySelectorAll('.news-card, .tip, .dica, .passo, .quiz-card');
     const windowHeight = window.innerHeight;
 
     elements.forEach(el => {
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  document.querySelectorAll('.news-card, .tip, .dica, .passo').forEach(el => {
+  document.querySelectorAll('.news-card, .tip, .dica, .passo, .quiz-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -186,5 +186,120 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(() => {
         alert("❌ Erro ao enviar a avaliação.");
       });
+  });
+
+  /* Modal do Questionário */
+  const openQuizBtn = document.getElementById('openQuiz');
+  const closeQuizBtn = document.getElementById('closeQuiz');
+  const quizModalOverlay = document.getElementById('quizModalOverlay');
+  const quizModal = document.getElementById('quizModal');
+
+  function openQuizModal() {
+    quizModal.classList.add('open');
+    document.body.classList.add('no-scroll');
+  }
+
+  function closeQuizModal() {
+    quizModal.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
+
+  openQuizBtn.addEventListener('click', openQuizModal);
+  closeQuizBtn.addEventListener('click', closeQuizModal);
+  quizModalOverlay.addEventListener('click', closeQuizModal);
+
+  /* Questionário de Segurança */
+  const safeAnswers = {
+    q1: 'nao', q2: 'sim', q3: 'nao', q4: 'nao', q5: 'sim',
+    q6: 'sim', q7: 'nao', q8: 'sim', q9: 'sim', q10: 'sim'
+  };
+
+  const quizTips = {
+    q1: 'Use senhas únicas para cada conta. Considere usar um gerenciador de senhas para facilitar.',
+    q2: 'Ative a autenticação de dois fatores (2FA) no seu e-mail e redes sociais agora mesmo.',
+    q3: 'Nunca anote senhas em locais acessíveis. Um gerenciador de senhas é a alternativa segura.',
+    q4: 'Mensagens urgentes sobre prêmios ou bloqueios quase sempre são golpes. Acesse o site oficial diretamente pelo navegador.',
+    q5: 'Atualize seus dispositivos assim que possível. As atualizações corrigem falhas que hackers exploram.',
+    q6: 'Configure backup automático na nuvem (Google Fotos, iCloud) para não perder seus arquivos.',
+    q7: 'Evite usar Wi-Fi público sem proteção. Use uma VPN ou aguarde uma rede confiável.',
+    q8: 'Sempre revise as permissões antes de instalar apps. Se pedir acesso desnecessário, desconfie.',
+    q9: 'Configure o bloqueio de tela com senha, PIN ou biometria em todos os seus dispositivos.',
+    q10: 'Baixe programas e mídia apenas de lojas e sites oficiais para evitar vírus e malwares.'
+  };
+
+  const quizSubmit = document.getElementById('quizSubmit');
+  const quizRetry = document.getElementById('quizRetry');
+  const quizForm = document.getElementById('quizForm');
+  const quizResult = document.getElementById('quizResult');
+
+  quizSubmit.addEventListener('click', () => {
+    const unanswered = [];
+    for (let i = 1; i <= 10; i++) {
+      if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+        unanswered.push(String(i).padStart(2, '0'));
+      }
+    }
+    if (unanswered.length > 0) {
+      alert(`Por favor, responda todas as perguntas antes de ver o resultado.\nPerguntas sem resposta: ${unanswered.map(n => '#' + n).join(', ')}`);
+      return;
+    }
+
+    let score = 0;
+    const wrongAnswers = [];
+    for (let i = 1; i <= 10; i++) {
+      const key = `q${i}`;
+      const selected = document.querySelector(`input[name="${key}"]:checked`).value;
+      if (selected === safeAnswers[key]) {
+        score++;
+      } else {
+        wrongAnswers.push(key);
+      }
+    }
+
+    document.getElementById('quizScoreNum').textContent = score;
+
+    const levelBadge = document.getElementById('quizLevel');
+    const levelMsg = document.getElementById('quizLevelMsg');
+
+    if (score >= 8) {
+      levelBadge.textContent = 'Alto Nível de Segurança';
+      levelBadge.className = 'quiz-level-badge alto';
+      levelMsg.textContent = 'Parabéns! Você tem ótimos hábitos de segurança digital. Continue assim e mantenha-se atualizado sobre novas ameaças.';
+    } else if (score >= 5) {
+      levelBadge.textContent = 'Nível Médio de Segurança';
+      levelBadge.className = 'quiz-level-badge medio';
+      levelMsg.textContent = 'Você já tem boas práticas, mas ainda há pontos a melhorar. Veja as dicas abaixo para se proteger ainda mais.';
+    } else {
+      levelBadge.textContent = 'Baixo Nível de Segurança';
+      levelBadge.className = 'quiz-level-badge baixo';
+      levelMsg.textContent = 'Atenção! Seus hábitos digitais precisam de ajustes importantes. Siga as dicas abaixo para se proteger contra golpes e ataques.';
+    }
+
+    const tipsContainer = document.getElementById('quizTips');
+    tipsContainer.innerHTML = '';
+    if (wrongAnswers.length === 0) {
+      tipsContainer.innerHTML = '<div class="quiz-all-good">Incrível! Você acertou tudo. Seus hábitos de segurança são exemplares!</div>';
+    } else {
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Pontos para melhorar:';
+      tipsContainer.appendChild(h3);
+      wrongAnswers.forEach(key => {
+        const div = document.createElement('div');
+        div.className = 'quiz-tip-item';
+        div.innerHTML = `<span class="quiz-tip-icon">!</span><span>${quizTips[key]}</span>`;
+        tipsContainer.appendChild(div);
+      });
+    }
+
+    quizForm.style.display = 'none';
+    quizResult.style.display = 'block';
+    quizModal.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  quizRetry.addEventListener('click', () => {
+    document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
+    quizResult.style.display = 'none';
+    quizForm.style.display = 'flex';
+    quizModal.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });

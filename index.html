@@ -274,6 +274,14 @@
 
       </section>
 
+      <section id="questionario" class="quiz-trigger-section">
+        <div class="container">
+          <h2 class="section-title">Teste Seu Nível de Segurança</h2>
+          <p class="quiz-trigger-desc">Descubra o quanto você está protegido no mundo digital respondendo 10 perguntas simples.</p>
+          <button id="openQuiz" class="cta-button">Iniciar Questionário</button>
+        </div>
+      </section>
+
     </main>
 
     <!-- Rodapé -->
@@ -283,6 +291,125 @@
       </div>
     </footer>
   </div>
+
+  <!-- Modal do Questionário -->
+  <div id="quizModal" class="quiz-modal">
+    <div class="quiz-modal-overlay" id="quizModalOverlay"></div>
+    <div class="quiz-modal-content">
+      <button id="closeQuiz" class="quiz-modal-close">&times;</button>
+      <h2 class="quiz-modal-title">Questionário de Segurança Digital</h2>
+      <p class="quiz-intro">Responda as perguntas abaixo e descubra o quanto você está protegido.</p>
+
+      <div id="quizForm" class="quiz-form">
+
+        <div class="quiz-card">
+          <span class="quiz-number">01</span>
+          <p class="quiz-question">Você usa a mesma senha (ou senhas muito parecidas) em mais de um lugar?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q1" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q1" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">02</span>
+          <p class="quiz-question">Quando você entra no seu e-mail ou redes sociais, o site pede um código enviado por SMS ou aplicativo no celular?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q2" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q2" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">03</span>
+          <p class="quiz-question">Você anota suas senhas em papéis, cadernos ou em conversas do WhatsApp/Bloco de Notas?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q3" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q3" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">04</span>
+          <p class="quiz-question">Se você recebe uma mensagem urgente dizendo que ganhou um prêmio ou que sua conta será bloqueada, você clica no link para conferir?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q4" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q4" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">05</span>
+          <p class="quiz-question">Quando o seu celular ou computador avisa que tem uma atualização de sistema disponível, você atualiza na hora?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q5" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q5" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">06</span>
+          <p class="quiz-question">Se o seu celular sumisse hoje, suas fotos e documentos importantes estariam salvos em outro lugar (nuvem ou pendrive)?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q6" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q6" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">07</span>
+          <p class="quiz-question">Você costuma se conectar em redes Wi-Fi abertas de praças, shoppings ou aeroportos sem usar uma proteção extra?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q7" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q7" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">08</span>
+          <p class="quiz-question">Antes de instalar um aplicativo novo, você verifica se ele está pedindo permissões desnecessárias (como acesso às suas fotos ou contatos)?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q8" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q8" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">09</span>
+          <p class="quiz-question">O seu celular e computador bloqueiam a tela sozinhos e pedem uma senha, desenho ou digital para abrir?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q9" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q9" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-number">10</span>
+          <p class="quiz-question">Você evita baixar filmes, jogos ou programas de sites que não conhece ou que parecem "piratas"?</p>
+          <div class="quiz-options">
+            <label class="quiz-label"><input type="radio" name="q10" value="sim" />Sim</label>
+            <label class="quiz-label"><input type="radio" name="q10" value="nao" />Não</label>
+          </div>
+        </div>
+
+        <div class="quiz-submit-area">
+          <button id="quizSubmit" class="cta-button">Ver Meu Resultado</button>
+        </div>
+      </div>
+
+      <div id="quizResult" class="quiz-result">
+        <div class="quiz-score-display">
+          <span id="quizScoreNum" class="quiz-score-num">0</span>
+          <span class="quiz-score-total">/10</span>
+        </div>
+        <div id="quizLevel" class="quiz-level-badge"></div>
+        <p id="quizLevelMsg" class="quiz-level-msg"></p>
+        <div id="quizTips" class="quiz-tips"></div>
+        <button id="quizRetry" class="cta-button quiz-retry-btn">Tentar Novamente</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
