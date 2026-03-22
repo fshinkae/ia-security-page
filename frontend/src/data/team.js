@@ -1,0 +1,18 @@
+export const membros = [
+  { nome: 'Arthur Freitas', github: 'stayxit', img: '/images/Arthur.jpg' },
+  { nome: 'Brenno Santiago', github: 'brennosantiago', img: '/images/brenno.png' },
+  { nome: 'Cristian Filho', github: 'LotusHZ', img: '/images/cris.jpg' },
+  { nome: 'Eduardo Junior', github: '', img: '/images/eduardo.jpg' },
+  { nome: 'Erick Souza', github: 'Erickeffre1332', img: '/images/erick.jpg' },
+  { nome: 'Fabio Sousa', github: 'fabiomassucatto', img: '/images/fabio.jpg' },
+  { nome: 'Felipe Shinkae', github: 'fshinkae', img: '/images/shinkae2.jpg' },
+  { nome: 'Gabriel Shinkae', github: 'gabrieleiji', img: '/images/gabriel.jpg' },
+  { nome: 'Heitor Cortes', github: 'heitorpcrl', img: '/images/heitor.jpg' },
+  { nome: 'João Leme', github: 'djaozin', img: '/images/joao.jpg' },
+  { nome: 'José Martins', github: 'BanguelaDev', img: '/images/bangueladev.jpg' },
+  { nome: 'João Brandão', github: 'joao95352', img: '/images/joaocaruzo.jpg' },
+  { nome: 'Marco Souza', github: 'Ghxxt1', img: '/images/Marco.jpg' },
+  { nome: 'Mateus Koike', github: 'landmarkjan182', img: '/images/koike.JPG' },
+  { nome: 'Matheus Silva', github: 'MatheusSilvaNB', img: '/images/mathaeus.png' },
+  { nome: 'Paulo Martins', github: 'PauloKT', img: '/images/paulokt.jpg' },
+]
